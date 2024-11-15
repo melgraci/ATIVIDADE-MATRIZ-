@@ -1,0 +1,742 @@
+Blibioteca 
+using System;
+using System.IO;
+
+namespace Biblioteca_Matriz
+{
+    class Matriz
+    {
+
+        public static void Leia(int[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+
+            for (int i = 0; i < linhas; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    // Apenas preenche as células que ainda têm o valor 0
+                    if (mat[i, j] == 0)
+                    {
+                        Console.Write($"Digite para [{i},{j}]: ");
+                        mat[i, j] = int.Parse(Console.ReadLine());
+                    }
+                }
+            }
+        }
+
+        public static void leia(int[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+            for (int i = 0; i < linhas; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Console.Write($"Digite para [{i},{j}]:");
+                    mat[i, j] = int.Parse(Console.ReadLine());
+                }// fim for j
+            }// fim for i
+
+        }// fim leia
+        //--------------------------------------------------
+        public static void gera(int[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+            Random random = new Random();
+            for (int i = 0; i < linhas; i++)
+                for (int j = 0; j < cols; j++)
+                    mat[i, j] = random.Next(0, 100);
+
+        }// fim gera
+        //-----------------------------------------------------
+        public static void mostra(int[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+            for (int i = 0; i < linhas; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Console.Write($"{mat[i, j],3} |");
+                }// fim for j
+                Console.WriteLine();
+            }// fim for i
+        }// fim mostra
+
+    }
+}
+exercicio 1 
+using Biblioteca_Matriz;
+namespace matriz
+{
+    internal class Program
+    {
+        static int maiorValorMatriz(int[,] mat)
+        {
+            int linhas = mat.GetLength(0); // pega linhas
+            int cols = mat.GetLength(1);
+            int maior = mat[0, 0];
+            for (int i = 0; i < linhas; i++)
+                for (int j = 0; j < cols; j++)
+                    if (mat[i, j] > maior)
+                        maior = mat[i, j];
+            // terminou percorrer funcao
+            return maior;
+        }
+        static int menorValorMatriz(int[,] mat)
+        {
+            int linhas = mat.GetLength(0); // pega linhas
+            int cols = mat.GetLength(1);
+            int menor = mat[0, 0];
+            for (int i = 0; i < linhas; i++)
+                for (int j = 0; j < cols; j++)
+                    if (mat[i, j] < menor)
+                        menor = mat[i, j];
+            // terminou percorrer funcao
+            return menor;
+        }
+
+        static void Main()
+
+        {
+            int linhas, colunas;
+            Console.WriteLine("*** Matrizes ***");
+            Console.WriteLine("quantidade de linhas e colunas:");
+            linhas = int.Parse(Console.ReadLine());
+            colunas = int.Parse(Console.ReadLine());
+            int[,] matrix = new int[linhas, colunas];//criando a matriz
+            Console.WriteLine(" Entre com dados para matriz:");
+            Matriz.mostra(matrix);
+            Matriz.gera(matrix);
+            Console.WriteLine("Matriz gerada:");
+            Matriz.mostra(matrix);
+            Console.ReadKey();
+
+
+        }
+
+    }
+
+}
+exercicio 2
+using Biblioteca_Matriz;
+
+namespace AtividadeMatriz
+{
+    internal class Matrix
+    {
+        // Função para encontrar o menor valor da matriz
+        static int menorValorMatriz(int[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+            int menor = mat[0, 0];
+            for (int i = 0; i < linhas; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (mat[i, j] < menor)
+                    {
+                        menor = mat[i, j];
+                    }
+                }
+            }
+            return menor;
+        }
+
+        // Função principal
+        public static void Main()
+        {
+            int linhas, colunas;
+            Console.WriteLine("*** Matrizes ***");
+            Console.WriteLine("Quantidade de linhas e colunas:");
+            linhas = int.Parse(Console.ReadLine());
+            colunas = int.Parse(Console.ReadLine());
+
+            // Criando a matriz
+            int[,] matrix = new int[linhas, colunas];
+
+            // Gerando a matriz aleatória
+            Matriz.gera(matrix);
+
+            // Mostrando a matriz gerada
+            Console.WriteLine("\nMatriz gerada:");
+            Matriz.mostra(matrix);
+
+            // Encontrando o menor valor da matriz
+            int menorValor = menorValorMatriz(matrix);
+            Console.WriteLine($"\nMenor valor da matriz: {menorValor}");
+
+            Console.ReadKey();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
+    }
+}
+exercicio 3 
+using System;
+using Biblioteca_Matriz;
+
+namespace AtividadeMatriz
+{
+    internal class Program
+    {
+        static int contarOcorrencias(int[,] mat, int x)
+        {
+            int contagem = 0;
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+
+            // Percorrer a matriz e contar as ocorrências de X
+            for (int i = 0; i < linhas; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (mat[i, j] == x)
+                    {
+                        contagem++;
+                    }
+                }
+            }
+
+            return contagem;
+        }
+
+        static void Main()
+        {
+            int linhas, colunas, x;
+            Console.WriteLine("*** Matrizes ***");
+            Console.WriteLine("Quantidade de linhas e colunas:");
+            linhas = int.Parse(Console.ReadLine());
+            colunas = int.Parse(Console.ReadLine());
+
+            int[,] matrix = new int[linhas, colunas]; // Criando a matriz
+
+            // Gerar a matriz com valores aleatórios
+            Console.WriteLine("Matriz gerada aleatoriamente:");
+            Matriz.gera(matrix);
+            Matriz.mostra(matrix);
+
+            // Solicitar o valor de X ao usuário
+            Console.WriteLine("\nDigite o número X para contar as ocorrências:");
+            x = int.Parse(Console.ReadLine());
+
+            // Contar as ocorrências de X na matriz
+            int ocorrencias = contarOcorrencias(matrix, x);
+            Console.WriteLine($"\nO número {x} aparece {ocorrencias} vez(es) na matriz.");
+
+            Console.ReadKey();
+        }
+    }
+}
+exercicio 4 
+using System;
+using Biblioteca_Matriz;
+
+namespace AtividadeMatriz
+{
+    internal class Matrizes
+    {
+        static void mostrarDiagonalPrincipal(int[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+
+            // Verifica se a matriz é quadrada e exibe a diagonal principal
+            if (linhas == cols)
+            {
+                Console.WriteLine("\nDiagonal principal da matriz:");
+                for (int i = 0; i < linhas; i++)
+                {
+                    Console.Write($"{mat[i, i],3} ");
+                }
+                Console.WriteLine(); // Para pular linha após a diagonal
+            }
+            else
+            {
+                Console.WriteLine("\nA matriz não é quadrada, não há diagonal principal.");
+            }
+        }
+
+        static void Main()
+        {
+            int n;
+
+            Console.WriteLine("*** Matrizes - Diagonal Principal ***");
+            Console.WriteLine("Digite o tamanho da matriz quadrada (máximo 100):");
+            n = int.Parse(Console.ReadLine());
+
+            if (n > 100)
+            {
+                Console.WriteLine("O tamanho da matriz não pode ser maior que 100.");
+                return; // Interrompe o programa se o valor for maior que 100
+            }
+
+            int[,] matrix = new int[n, n]; // Criando a matriz N x N
+
+            // Gerar a matriz com valores aleatórios
+            Console.WriteLine("\nMatriz gerada aleatoriamente:");
+            Matriz.gera(matrix);
+            Matriz.mostra(matrix);
+
+            // Exibir a diagonal principal
+            mostrarDiagonalPrincipal(matrix);
+
+            Console.ReadKey();
+        }
+    }
+}
+
+exercicio 5 
+
+using System;
+using Biblioteca_Matriz;
+
+namespace AtividadeMatriz
+{
+    internal class Matrixx
+    {
+        static void mostrarDiagonalSecundaria(int[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+
+            // Verifica se a matriz é quadrada e exibe a diagonal secundária
+            if (linhas == cols)
+            {
+                Console.WriteLine("\nDiagonal secundária da matriz:");
+                for (int i = 0; i < linhas; i++)
+                {
+                    Console.Write($"{mat[i, (cols - 1) - i],3} ");
+                }
+                Console.WriteLine(); // Para pular linha após a diagonal
+            }
+            else
+            {
+                Console.WriteLine("\nA matriz não é quadrada, não há diagonal secundária.");
+            }
+        }
+
+        static void Main()
+        {
+            int n;
+
+            Console.WriteLine("*** Matrizes - Diagonal Secundária ***");
+            Console.WriteLine("Digite o tamanho da matriz quadrada (máximo 100):");
+            n = int.Parse(Console.ReadLine());
+
+            if (n > 100)
+            {
+                Console.WriteLine("O tamanho da matriz não pode ser maior que 100.");
+                return; // Interrompe o programa se o valor for maior que 100
+            }
+
+            int[,] matrix = new int[n, n]; // Criando a matriz N x N
+
+            // Gerar a matriz com valores aleatórios
+            Console.WriteLine("\nMatriz gerada aleatoriamente:");
+            Matriz.gera(matrix);
+            Matriz.mostra(matrix);
+
+            // Exibir a diagonal secundária
+            mostrarDiagonalSecundaria(matrix);
+
+            Console.ReadKey();
+        }
+    }
+}
+exercicio 6 
+using System;
+using Biblioteca_Matriz;
+
+namespace AtividadeMatriz
+{
+    internal class Matrizx 
+    {
+        static void somarMatrizes(int[,] mat1, int[,] mat2)
+        {
+            int linhas1 = mat1.GetLength(0);
+            int cols1 = mat1.GetLength(1);
+            int linhas2 = mat2.GetLength(0);
+            int cols2 = mat2.GetLength(1);
+
+            if (linhas1 == linhas2 && cols1 == cols2)
+            {
+                int[,] resultado = new int[linhas1, cols1];
+
+                for (int i = 0; i < linhas1; i++)
+                {
+                    for (int j = 0; j < cols1; j++)
+                    {
+                        resultado[i, j] = mat1[i, j] + mat2[i, j];
+                    }
+                }
+
+                Console.WriteLine("\nResultado da soma das matrizes:");
+                Matriz.mostra(resultado);
+            }
+            else
+            {
+                Console.WriteLine("\nAs matrizes não têm a mesma ordem e não podem ser somadas.");
+            }
+        }
+
+        static void executar()
+        {
+            int n;
+
+            Console.WriteLine("*** Matrizes - Soma de Matrizes ***");
+            Console.WriteLine("Digite o tamanho das matrizes quadradas (máximo 100):");
+            n = int.Parse(Console.ReadLine());
+
+            if (n > 100)
+            {
+                Console.WriteLine("O tamanho das matrizes não pode ser maior que 100.");
+                return;
+            }
+
+            int[,] matriz1 = new int[n, n];
+            int[,] matriz2 = new int[n, n];
+
+            Console.WriteLine("\nPrimeira Matriz gerada aleatoriamente:");
+            Matriz.gera(matriz1);
+            Matriz.mostra(matriz1);
+
+            Console.WriteLine("\nSegunda Matriz gerada aleatoriamente:");
+            Matriz.gera(matriz2);
+            Matriz.mostra(matriz2);
+
+            somarMatrizes(matriz1, matriz2);
+
+            Console.ReadKey();
+        }
+    }
+}
+exercicio 7 
+namespace Biblioteca_Matriz
+{
+    class Matrizx
+    {
+        public static void leia(double[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+            for (int i = 0; i < linhas; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Console.Write($"Digite para [{i},{j}]: ");
+                    mat[i, j] = double.Parse(Console.ReadLine());
+                }
+            }
+        }
+
+        public static void gera(double[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+            Random random = new Random();
+            for (int i = 0; i < linhas; i++)
+                for (int j = 0; j < cols; j++)
+                    mat[i, j] = random.NextDouble() * 100; // valores reais entre 0 e 100
+        }
+
+        public static void mostra(double[,] mat)
+        {
+            int linhas = mat.GetLength(0);
+            int cols = mat.GetLength(1);
+            for (int i = 0; i < linhas; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Console.Write($"{mat[i, j],5:F2} "); // Exibe valores com 2 casas decimais
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+exercicio 8 
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static int VerificaRaios(List<(int, int)> raios)
+    {
+        HashSet<(int, int)> quadrantes = new HashSet<(int, int)>();
+
+        foreach (var raio in raios)
+        {
+            if (quadrantes.Contains(raio))
+            {
+                return 1; 
+            }
+            quadrantes.Add(raio);
+        }
+
+        return 0; 
+    }
+
+    static void executar()
+    {
+        
+        int n = int.Parse(Console.ReadLine());
+
+        
+        List<(int, int)> raios = new List<(int, int)>();
+        for (int i = 0; i < n; i++)
+        {
+            string[] entrada = Console.ReadLine().Split();
+            int x = int.Parse(entrada[0]);
+            int y = int.Parse(entrada[1]);
+            raios.Add((x, y));
+        }
+
+       
+        Console.WriteLine(VerificaRaios(raios));
+    }
+}
+
+exercicio 9 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+internal class atividade9
+{
+    public class Evento
+    {
+        public int x;
+        public int yStart;
+        public int yEnd;
+        public int tipo; 
+
+        public Evento(int x, int yStart, int yEnd, int tipo)
+        {
+            this.x = x;
+            this.yStart = yStart;
+            this.yEnd = yEnd;
+            this.tipo = tipo;
+        }
+    }
+
+    static int CalcularArea(List<Evento> eventos)
+    {
+        
+        eventos.Sort((a, b) => a.x != b.x ? a.x.CompareTo(b.x) : b.tipo.CompareTo(a.tipo));
+
+        var cobertura = new List<int>(); // Lista para armazenar as posições Y ativas
+        int area = 0;
+        int xAnterior = eventos[0].x;
+
+        foreach (var evento in eventos)
+        {
+            // Calcula a área entre xAnterior e o x do evento atual
+            int largura = evento.x - xAnterior;
+            if (largura > 0)
+            {
+                // Calcula a área coberta pela união das faixas Y ativas
+                int altura = 0;
+                int yAnterior = -1;
+
+                foreach (var y in cobertura)
+                {
+                    if (yAnterior == -1)
+                    {
+                        yAnterior = y;
+                    }
+                    else
+                    {
+                        altura += y - yAnterior;
+                        yAnterior = y;
+                    }
+                }
+
+                area += largura * altura;
+            }
+
+            // Adiciona ou remove o intervalo de Y conforme o tipo do evento
+            if (evento.tipo == 1) // Entrada
+            {
+                cobertura.Add(evento.yStart);
+                cobertura.Add(evento.yEnd);
+            }
+            else // Saída
+            {
+                cobertura.Remove(evento.yStart);
+                cobertura.Remove(evento.yEnd);
+            }
+
+            // Atualiza a posição anterior para o valor de x
+            xAnterior = evento.x;
+        }
+
+        return area;
+    }
+
+    static void Main()
+    {
+        // Lê o número de redes
+        int N = int.Parse(Console.ReadLine());
+
+        var eventos = new List<Evento>();
+
+        // Lê as coordenadas de cada rede
+        for (int i = 0; i < N; i++)
+        {
+            var coordenadas = Console.ReadLine().Split();
+            int xi = int.Parse(coordenadas[0]);
+            int xf = int.Parse(coordenadas[1]);
+            int yi = int.Parse(coordenadas[2]);
+            int yf = int.Parse(coordenadas[3]);
+
+            // Adiciona os eventos de entrada e saída para cada retângulo
+            eventos.Add(new Evento(xi, yi, yf, 1)); // Evento de entrada (início)
+            eventos.Add(new Evento(xf, yi, yf, -1)); // Evento de saída (fim)
+        }
+
+        // Calcula a área total aproveitada
+        int area = CalcularArea(eventos);
+
+        // Imprime o resultado
+        Console.WriteLine(area);
+    }
+}
+exercicio 10 
+using System;
+
+class Atividade10
+{
+    static void executar()
+    {
+       
+        int R = 3; 
+        int C = 3; 
+
+        // Criar uma matriz para armazenar o número de tropas
+        int[,] matriz = new int[R, C];
+
+        Random random = new Random();
+
+        // Preencher a matriz com números aleatórios entre 0 e 100
+        for (int i = 0; i < R; i++)
+        {
+            for (int j = 0; j < C; j++)
+            {
+                matriz[i, j] = random.Next(0, 101); // Valor aleatório entre 0 e 100
+            }
+        }
+
+        // Exibir a matriz gerada
+        Console.WriteLine("Matriz das Tropas (Quantidade de Tropas por Cidade): ");
+        for (int i = 0; i < R; i++)
+        {
+            Console.Write("Região " + (i + 1) + ": ");
+            for (int j = 0; j < C; j++)
+            {
+                Console.Write(matriz[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        // Exibir a soma das tropas para cada região
+        Console.WriteLine("\nForça Total das Regiões: ");
+        for (int i = 0; i < R; i++)
+        {
+            int soma = 0;
+            for (int j = 0; j < C; j++)
+            {
+                soma += matriz[i, j];
+            }
+            Console.WriteLine("Região " + (i + 1) + ": " + soma + " tropas");
+        }
+    }
+}
+
+exercicio 11
+using System;
+
+class atividade10
+{
+    static void executar()
+    {
+        
+        int N = 3; // Pode ser ajustado conforme necessário
+
+        // Criar a matriz de tamanho N x N
+        int[,] matriz = new int[N, N];
+
+        Random random = new Random();
+
+        // Preencher a matriz com números aleatórios entre 1 e 100
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                matriz[i, j] = random.Next(1, 101); // Valor aleatório entre 1 e 100
+            }
+        }
+
+        // Exibir a matriz gerada
+        Console.WriteLine("Mapa do Tesouro (Quantidade de Moedas em Cada Região): ");
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                Console.Write(matriz[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        // Calcular a soma da diagonal principal (canto superior esquerdo ao inferior direito)
+        int somaDiagonalPrincipal = 0;
+        int somaDiagonalSecundaria = 0;
+        for (int i = 0; i < N; i++)
+        {
+            somaDiagonalPrincipal += matriz[i, i]; // Diagonal principal
+            somaDiagonalSecundaria += matriz[i, N - i - 1]; // Diagonal secundária
+        }
+
+        // Exibir as somas das diagonais
+        Console.WriteLine("\nSoma da Diagonal Principal: " + somaDiagonalPrincipal);
+        Console.WriteLine("Soma da Diagonal Secundária: " + somaDiagonalSecundaria);
+
+        // Comparar as somas das diagonais e indicar qual é maior
+        if (somaDiagonalPrincipal > somaDiagonalSecundaria)
+        {
+            Console.WriteLine("O maior tesouro está na diagonal principal, vamos para lá!");
+        }
+        else if (somaDiagonalSecundaria > somaDiagonalPrincipal)
+        {
+            Console.WriteLine("O maior tesouro está na diagonal secundária, vamos para lá!");
+        }
+        else
+        {
+            Console.WriteLine("As duas diagonais têm o mesmo valor, escolha a que preferir!");
+        }
+    }
+}
+
+
+
+
+
+
+
